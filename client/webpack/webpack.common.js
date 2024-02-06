@@ -20,5 +20,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [new CopyWebpackPlugin([{ from: 'public', to: 'public' }])]
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(CURRENT_WORKING_DIR, 'public'),
+        to: path.join(CURRENT_WORKING_DIR, 'dist')
+      }
+    ])
+  ]
 };
