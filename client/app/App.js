@@ -28,7 +28,7 @@ const App = () => (
     <ConnectedRouter history={history}>
       <SocketProvider>
         <ScrollToTop>
-          <Application>Hello</Application>
+          <Application></Application>
         </ScrollToTop>
       </SocketProvider>
     </ConnectedRouter>

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js"
   },
   "dependencies": {
     "@fontsource/poppins": "^4.5.9",

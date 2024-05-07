@@ -11,6 +11,7 @@ import axios from 'axios';
 import { FETCH_STORE_BRANDS } from './constants';
 
 import handleError from '../../utils/error';
+import { API_URL } from '../../constants';
 
 // fetch store brands api
 export const fetchStoreBrands = () => {

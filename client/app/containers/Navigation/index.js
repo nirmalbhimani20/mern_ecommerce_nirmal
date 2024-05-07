@@ -22,12 +22,16 @@ import CartIcon from '../../components/Common/CartIcon';
 import Autosuggest from 'react-autosuggest';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
+import MiniBrand from '../../components/Store//MiniBrand';
+import Cart from '../Cart';
+import Menu from '../NavigationMenu';
 
 import actions from '../../actions';
 
 export class Navigation extends Component {
   componentDidMount() {
     this.props.fetchStoreCategories();
+    this.props.fetchStoreBrands();
   }
 
   toggleMenu() {
@@ -37,6 +41,10 @@ export class Navigation extends Component {
 
   getSuggestionValue(suggestion) {
     return suggestion.name;
+  }
+
+  toggleBrand() {
+    this.props.toggleBrand();
   }
 
   renderSuggestion(suggestion, { query, isHighlighted }) {
@@ -92,6 +100,7 @@ export class Navigation extends Component {
 
   render() {
     const {
+      history,
       authenticated,
       categories,
       searchValue,
@@ -103,7 +112,9 @@ export class Navigation extends Component {
       toggleMenu,
       isMenuOpen,
       isCartOpen,
-      cartItems
+      cartItems,
+      brands,
+      isBrandOpen
     } = this.props;
 
     const inputProps = {
@@ -159,7 +170,7 @@ export class Navigation extends Component {
                   />
                 )}
                 <Link to='/'>
-                  <h1 className='logo'>MERN Store</h1>
+                  <h1 className='logo'>MERN Store Nirmal</h1>
                 </Link>
               </div>
             </Col>
@@ -212,11 +223,105 @@ export class Navigation extends Component {
                   cartItems={cartItems}
                   onClick={toggleCart}
                 />
-                <Nav></Nav>
+                <Nav navbar>
+                  {brands && brands.length > 0 && (
+                    <Dropdown
+                      nav
+                      inNavbar
+                      toggle={() => this.toggleBrand()}
+                      isOpen={isBrandOpen}
+                    >
+                      <DropdownToggle nav>
+                        Brands
+                        <span className='fa fa-chevron-down dropdown-caret'></span>
+                      </DropdownToggle>
+                      <DropdownMenu right className='nav-brand-dropdown'>
+                        <div className='mini-brand'>
+                          <MiniBrand
+                            brands={brands}
+                            toggleBrand={() => this.toggleBrand()}
+                          />
+                        </div>
+                      </DropdownMenu>
+                    </Dropdown>
+                  )}
+                  <NavItem>
+                    <NavLink
+                      tag={ActiveLink}
+                      to='/shop'
+                      activeClassName='active'
+                    >
+                      Shop
+                    </NavLink>
+                  </NavItem>
+                  {authenticated ? (
+                    <UncontrolledDropdown nav inNavbar>
+                      <DropdownToggle nav>
+                        {user.firstName ? user.firstName : 'Welcome'}
+                        <span className='fa fa-chevron-down dropdown-caret'></span>
+                      </DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem
+                          onClick={() => history.push('/dashboard')}
+                        >
+                          Dashboard
+                        </DropdownItem>
+                        <DropdownItem onClick={signOut}>Sign Out</DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  ) : (
+                    <UncontrolledDropdown nav inNavbar>
+                      <DropdownToggle nav>
+                        Welcome!
+                        <span className='fa fa-chevron-down dropdown-caret'></span>
+                      </DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem onClick={() => history.push('/login')}>
+                          Login
+                        </DropdownItem>
+                        <DropdownItem onClick={() => history.push('/register')}>
+                          Sign Up
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  )}
+                </Nav>
               </Navbar>
             </Col>
           </Row>
         </Container>
+
+        {/* hidden cart drawer */}
+        <div
+          className={isCartOpen ? 'mini-cart-open' : 'hidden-mini-cart'}
+          aria-hidden={`${isCartOpen ? false : true}`}
+        >
+          <div className='mini-cart'>
+            <Cart />
+          </div>
+          <div
+            className={
+              isCartOpen ? 'drawer-backdrop dark-overflow' : 'drawer-backdrop'
+            }
+            onClick={toggleCart}
+          />
+        </div>
+
+        {/* hidden menu drawer */}
+        <div
+          className={isMenuOpen ? 'mini-menu-open' : 'hidden-mini-menu'}
+          aria-hidden={`${isMenuOpen ? false : true}`}
+        >
+          <div className='mini-menu'>
+            <Menu />
+          </div>
+          <div
+            className={
+              isMenuOpen ? 'drawer-backdrop dark-overflow' : 'drawer-backdrop'
+            }
+            onClick={toggleMenu}
+          />
+        </div>
       </header>
     );
   }
@@ -229,7 +334,10 @@ const mapStateToProps = state => {
     searchValue: state.navigation.searchValue,
     cartItems: state.cart.cartItems,
     isMenuOpen: state.navigation.isMenuOpen,
-    isCartOpen: state.navigation.isCartOpen
+    isCartOpen: state.navigation.isCartOpen,
+    isBrandOpen: state.navigation.isBrandOpen,
+    brands: state.brand.storeBrands,
+    user: state.account.user
   };
 };
 export default connect(mapStateToProps, actions)(withRouter(Navigation));

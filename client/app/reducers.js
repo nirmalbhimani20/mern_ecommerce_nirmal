@@ -13,6 +13,11 @@ import accountReducer from './containers/Account/reducer';
 import categoryReducer from './containers/Category/reducer';
 import navigationReducer from './containers/Navigation/reducer';
 import cartReducer from './containers/Cart/reducer';
+import brandReducer from './containers/Brand/reducer';
+import newsletterReducer from './containers/Newsletter/reducer';
+import navigationMenuReducer from './containers/NavigationMenu/reducer';
+import loginReducer from './containers/Login/reducer';
+import signupReducer from './containers/Signup/reducer';
 
 const createReducer = history =>
   combineReducers({
@@ -22,7 +27,12 @@ const createReducer = history =>
     account: accountReducer,
     category: categoryReducer,
     navigation: navigationReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    brand: brandReducer,
+    newsletter: newsletterReducer,
+    menu: navigationMenuReducer,
+    login: loginReducer,
+    signup: signupReducer
   });
 
 export default createReducer;

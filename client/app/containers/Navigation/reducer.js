@@ -9,7 +9,8 @@ import {
   SUGGESTIONS_FETCH_REQUEST,
   SUGGESTIONS_CLEAR_REQUEST,
   SEARCH_CHANGE,
-  TOGGLE_CART
+  TOGGLE_CART,
+  TOGGLE_BRAND
 } from './constants';
 
 const initialState = {
@@ -46,6 +47,11 @@ const navigationReducer = (state = initialState, action) => {
       return {
         ...state,
         isCartOpen: !state.isCartOpen
+      };
+    case TOGGLE_BRAND:
+      return {
+        ...state,
+        isBrandOpen: !state.isBrandOpen
       };
     default:
       return state;

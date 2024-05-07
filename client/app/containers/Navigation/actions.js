@@ -11,7 +11,8 @@ import {
   SUGGESTIONS_FETCH_REQUEST,
   SUGGESTIONS_CLEAR_REQUEST,
   SEARCH_CHANGE,
-  TOGGLE_CART
+  TOGGLE_CART,
+  TOGGLE_BRAND
 } from './constants';
 import { API_URL } from '../../constants';
 
@@ -58,5 +59,11 @@ export const onSearch = v => {
 export const toggleCart = () => {
   return {
     type: TOGGLE_CART
+  };
+};
+
+export const toggleBrand = () => {
+  return {
+    type: TOGGLE_BRAND
   };
 };
