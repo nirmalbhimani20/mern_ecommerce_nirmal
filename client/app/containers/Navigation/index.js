@@ -102,19 +102,21 @@ export class Navigation extends Component {
     const {
       history,
       authenticated,
+      user,
+      cartItems,
+      brands,
       categories,
+      signOut,
+      isMenuOpen,
+      isCartOpen,
+      isBrandOpen,
+      toggleCart,
+      toggleMenu,
       searchValue,
       suggestions,
       onSearch,
       onSuggestionsFetchRequested,
-      onSuggestionsClearRequested,
-      toggleCart,
-      toggleMenu,
-      isMenuOpen,
-      isCartOpen,
-      cartItems,
-      brands,
-      isBrandOpen
+      onSuggestionsClearRequested
     } = this.props;
 
     const inputProps = {

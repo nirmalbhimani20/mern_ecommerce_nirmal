@@ -4,7 +4,7 @@
  *
  */
 
-import { CLEAR_AUTH } from './constants';
+import { SET_AUTH, CLEAR_AUTH } from './constants';
 
 const initialState = {
   authenticated: false,
@@ -13,6 +13,11 @@ const initialState = {
 
 const authenticationReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_AUTH:
+      return {
+        ...state,
+        authenticated: true
+      };
     case CLEAR_AUTH:
       return {
         ...state,

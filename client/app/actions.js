@@ -15,6 +15,8 @@ import * as newsletter from './containers/Newsletter/actions';
 import * as menu from './containers/NavigationMenu/actions';
 import * as login from './containers/Login/actions';
 import * as signup from './containers/Signup/actions';
+import * as contact from './containers/Contact/actions';
+import * as merchant from './containers/Merchant/actions';
 
 export default function mapDispatchToProps(dispatch) {
   return bindActionCreators(
@@ -27,7 +29,9 @@ export default function mapDispatchToProps(dispatch) {
       ...newsletter,
       ...menu,
       ...login,
-      ...signup
+      ...signup,
+      ...contact,
+      ...merchant
     },
     dispatch
   );

@@ -18,6 +18,8 @@ import newsletterReducer from './containers/Newsletter/reducer';
 import navigationMenuReducer from './containers/NavigationMenu/reducer';
 import loginReducer from './containers/Login/reducer';
 import signupReducer from './containers/Signup/reducer';
+import contactReducer from './containers/Contact/reducer';
+import merchantReducer from './containers/Merchant/reducer';
 
 const createReducer = history =>
   combineReducers({
@@ -32,7 +34,9 @@ const createReducer = history =>
     newsletter: newsletterReducer,
     menu: navigationMenuReducer,
     login: loginReducer,
-    signup: signupReducer
+    signup: signupReducer,
+    contact: contactReducer,
+    merchant: merchantReducer
   });
 
 export default createReducer;
