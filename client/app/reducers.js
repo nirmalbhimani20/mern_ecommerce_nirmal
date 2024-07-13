@@ -20,6 +20,8 @@ import loginReducer from './containers/Login/reducer';
 import signupReducer from './containers/Signup/reducer';
 import contactReducer from './containers/Contact/reducer';
 import merchantReducer from './containers/Merchant/reducer';
+import dashboardReducer from './containers/Dashboard/reducer';
+import productReducer from './containers/Product/reducer';
 
 const createReducer = history =>
   combineReducers({
@@ -36,7 +38,9 @@ const createReducer = history =>
     login: loginReducer,
     signup: signupReducer,
     contact: contactReducer,
-    merchant: merchantReducer
+    merchant: merchantReducer,
+    dashboard: dashboardReducer,
+    product: productReducer
   });
 
 export default createReducer;

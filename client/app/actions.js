@@ -17,6 +17,8 @@ import * as login from './containers/Login/actions';
 import * as signup from './containers/Signup/actions';
 import * as contact from './containers/Contact/actions';
 import * as merchant from './containers/Merchant/actions';
+import * as dashboard from './containers/Dashboard/actions';
+import * as product from './containers/Product/actions';
 
 export default function mapDispatchToProps(dispatch) {
   return bindActionCreators(
@@ -31,7 +33,9 @@ export default function mapDispatchToProps(dispatch) {
       ...login,
       ...signup,
       ...contact,
-      ...merchant
+      ...merchant,
+      ...dashboard,
+      ...product
     },
     dispatch
   );

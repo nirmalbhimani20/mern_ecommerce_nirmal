@@ -4,3 +4,9 @@ export const SOCKET_URL =
     : window.location.host;
 
 export const API_URL = process.env.API_URL;
+
+export const ROLES = {
+  Admin: 'ROLE ADMIN',
+  Member: 'ROLE MEMBER',
+  Merchant: 'ROLE MERCHANT'
+};
