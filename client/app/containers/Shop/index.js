@@ -39,7 +39,7 @@ class Shop extends React.PureComponent {
             md={{ size: 12, order: 1 }}
             lg={{ size: 3, order: 1 }}
           >
-            {/* <ProductFilter filterProducts={filterProducts} /> */}
+            <ProductFilter filterProducts={filterProducts} />
           </Col>
           <Col
             xs={{ size: 12, order: 2 }}

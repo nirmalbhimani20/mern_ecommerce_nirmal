@@ -46,8 +46,6 @@ export const fetchBrandProducts = slug => {
         type: FETCH_STORE_PRODUCTS,
         payload: response.data.products
       });
-
-      console.log(getState().storeProducts.length);
     } catch (error) {
       handleError(error, dispatch);
     } finally {
@@ -62,12 +60,10 @@ export const filterProducts = (n, v) => {
       n ?? dispatch({ type: RESET_ADVANCED_FILTERS });
 
       dispatch(setProductLoading(true));
-
       const advancedFilters = getState().product.advancedFilters;
       let payload = productsFilterOrganizer(n, v, advancedFilters);
       dispatch({ type: SET_ADVANCED_FILTERS, payload });
-      const sortorder = getSortOrder(payload.order);
-
+      const sortOrder = getSortOrder(payload.order);
       payload = { ...payload, sortOrder };
 
       const response = await axios.get(`${API_URL}/product/list`, {
@@ -90,6 +86,8 @@ export const filterProducts = (n, v) => {
       dispatch({ type: SET_ADVANCED_FILTERS, payload: newPayload });
     } catch (error) {
       handleError(error);
+    } finally {
+      dispatch(setProductLoading(false));
     }
   };
 };
@@ -106,19 +104,20 @@ const productsFilterOrganizer = (n, v, s) => {
         rating: s.rating,
         order: s.order,
         page: s.currentPage,
-        limt: s.limit
+        limit: s.limit
       };
-    case 'brand': {
+    case 'brand':
       return {
         name: s.name,
         category: s.category,
         brand: v,
         min: s.min,
         max: s.max,
+        rating: s.rating,
+        order: s.order,
         page: s.currentPage,
         limit: s.limit
       };
-    }
     case 'sorting':
       return {
         name: s.name,
@@ -183,13 +182,13 @@ const productsFilterOrganizer = (n, v, s) => {
 };
 
 const getSortOrder = value => {
-  let order = {};
+  let sortOrder = {};
   switch (value) {
     case 0:
       sortOrder._id = -1;
       break;
     case 1:
-      sortOrder.prioce = -1;
+      sortOrder.price = -1;
       break;
     case 2:
       sortOrder.price = 1;

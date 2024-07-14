@@ -25,7 +25,7 @@ const initialState = {
     min: 1,
     max: 2500,
     rating: 0,
-    prder: 0,
+    order: 0,
     totalPages: 1,
     currentPage: 1,
     count: 0,
